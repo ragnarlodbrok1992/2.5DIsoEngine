@@ -1,6 +1,7 @@
 import glfw
 
 from OpenGL.GL import *
+from entities.test.debug_triangle import DebugTriangle
 
 
 TITLE_BAR = "IsoEngine"
@@ -36,12 +37,19 @@ def main():
     # Set key callback
     glfw.set_key_callback(window, key_callback)
 
+    # Debug objects
+    debug_triangle = DebugTriangle()
+
     while not glfw.window_should_close(window):
         # Poll for and process events
         glfw.poll_events()
 
         # Render here
         glClear(GL_COLOR_BUFFER_BIT)
+        glClearColor(0.2, 0.3, 0.3, 1.0)
+
+        # Render debug objects
+        debug_triangle.render()
 
         # Swap front and back buffers
         glfw.swap_buffers(window)
